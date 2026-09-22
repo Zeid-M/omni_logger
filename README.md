@@ -18,7 +18,7 @@ OmniLogger simplifies logging for developers by providing a ready-to-use Python 
    Install OmniLogger using `pip`:
 
    ```bash
-   pip install omni-logger
+   pip install z-omni-logger
    ```
 
 2. **(Optional) Configure OmniLogger**
@@ -285,13 +285,13 @@ logger.info("User entered password and secret key")
 **With Censorship Enabled:**
 
 ```
-[INFO|M:omni_logger_core|F:main|L:505|T:MainThread|E:  ] 2024-11-20T12:27:27+0300: User entered ******** and ******** key
+[INFO|ID:105335|M:omni_logger_core|F:main|L:505|T:MainThread] 2024-11-20T12:27:27+0300: User entered ******** and ******** key
 ```
 
 **With Censorship Disabled:**
 
 ```
-[INFO|M:omni_logger_core|F:main|L:505|T:MainThread|E:  ] 2024-11-20T12:27:27+0300: User entered password and secret key
+[INFO|ID:105335|M:omni_logger_core|F:main|L:505|T:MainThread] 2024-11-20T12:27:27+0300: User entered password and secret key
 ```
 
 #### Throttling Filter
@@ -331,7 +331,7 @@ logger.warning("This is a repeated warning!")  # Ignored if logged within 2 seco
 **Output:**
 
 ```
-[WARNING|M:omni_logger_core|F:main|L:505|T:MainThread|E:  ] 2024-11-20T12:31:27+0300: - This is a repeated warning! (Logged once)
+[WARNING|ID:105335|M:omni_logger_core|F:main|L:505|T:MainThread] 2024-11-20T12:31:27+0300: - This is a repeated warning! (Logged once)
 ```
 
 **Behavior:**
@@ -400,8 +400,8 @@ logger_test.warning("This warning message will be logged.")
 **Output:**
 
 ```
-[INFO|M:main|F:main|L:505|T:MainThread|E:  ] 2024-11-20T12:36:27+0300: This info message will be logged.
-[WARNING|M:test|F:test|L:505|T:MainThread|E:  ] 2024-11-20T12:36:47+0300: This warning message will be logged.
+[INFO|ID:105335|M:main|F:main|L:505|T:MainThread] 2024-11-20T12:36:27+0300: This info message will be logged.
+[WARNING|ID:105335|M:test|F:test|L:505|T:MainThread] 2024-11-20T12:36:47+0300: This warning message will be logged.
 ```
 
 #### Exclude Module Filter
@@ -459,7 +459,7 @@ logger_debug.info("This message will also not be logged.")
 **Output:**
 
 ```
-[INFO|M:main|F:main|L:505|T:MainThread|E:  ] 2024-11-20T12:42:27+0300: This message will be logged.
+[INFO|ID:105335|M:main|F:main|L:505|T:MainThread] 2024-11-20T12:42:27+0300: This message will be logged.
 ```
 
 #### Allow Module Filter
@@ -517,8 +517,8 @@ logger_debug.info("This message will not be logged.")
 **Output:**
 
 ```
-[INFO|M:main|F:main|L:505|T:MainThread|E:  ] 2024-11-20T12:49:27+0300: This message will be logged.
-[INFO|M:auth|F:auth|L:235|T:MainThread|E:  ] 2024-11-20T12:49:40+0300:This authentication log will also be logged.
+[INFO|ID:105335|M:main|F:main|L:505|T:MainThread] 2024-11-20T12:49:27+0300: This message will be logged.
+[INFO|ID:105335|M:auth|F:auth|L:235|T:MainThread] 2024-11-20T12:49:40+0300:This authentication log will also be logged.
 ```
 
 ### Periodic Settings Refresh

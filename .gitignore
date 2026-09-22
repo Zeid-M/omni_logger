@@ -4,4 +4,4 @@ __pycache__/
 .pytest_cache
 dist
 build
-src/omni_logger.egg-info
+src/*.egg-info
