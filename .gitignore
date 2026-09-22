@@ -1,0 +1,7 @@
+__pycache__/
+.mypy_cache
+.vscode
+.pytest_cache
+dist
+build
+src/omni_logger.egg-info

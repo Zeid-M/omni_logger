@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "objects": {
+    "queue": {
+      "class": "queue.Queue",
+      "maxsize": 100000
+    }
+  },
+  "formatters": {
+    "json": {
+      "()": "omni_logger.formatters.json_formatter.JSONFormatter",
+      "fmt_keys": {
+        "record_id": "record_id",
+        "level": "levelname",
+        "process": "process",
+        "module": "module",
+        "function": "funcName",
+        "line": "lineno",
+        "path": "pathname",
+        "thread_name": "threadName",
+        "logger": "name",
+        "timestamp": "timestamp",
+        "message": "message"
+      }
+    },
+    "colored": {
+      "()": "omni_logger.formatters.colored_formatter.ColoredFormatter",
+      "format": "[%(levelname)-8s|ID:%(process)d|M:%(module)s|F:%(funcName)s|L:%(lineno)4d|T:%(threadName)s] %(asctime)s: %(message)s",
+      "datefmt": "%Y-%m-%dT%H:%M:%S%z"
+    }
+  },
+  "filters": {
+    "censorship": {
+      "()": "omni_logger.filters.censorship_filter.CensorshipFilter"
+    },
+    "throttling": {
+      "()": "omni_logger.filters.throttling_filter.ThrottlingFilter"
+    },
+    "exclude_module": {
+      "()": "omni_logger.filters.exclude_module_filter.ExcludeModuleFilter"
+    },
+    "allow_module": {
+      "()": "omni_logger.filters.allow_module_filter.AllowModuleFilter"
+    },
+    "level_module": {
+      "()": "omni_logger.filters.level_module_filter.LevelModuleFilter"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "DEBUG",
+      "formatter": "colored",
+      "filters": [
+        "censorship",
+        "throttling",
+        "exclude_module",
+        "allow_module",
+        "level_module"
+      ],
+      "stream": "ext://sys.stdout"
+    },
+    "file_json": {
+      "class": "logging.FileHandler",
+      "level": "DEBUG",
+      "formatter": "json",
+      "filters": [
+        "censorship",
+        "throttling",
+        "exclude_module",
+        "allow_module",
+        "level_module"
+      ],
+      "filename": "/tmp/omni_logger_log.jsonl"
+    },
+    "queue_handler": {
+      "()": "omni_logger.handlers.queue_handler.QueueListenerHandler",
+      "handlers": [
+        "cfg://handlers.console",
+        "cfg://handlers.file_json",
+        "cfg://handlers.alert_handler"
+      ],
+      "queue": "cfg://objects.queue"
+    },
+    "alert_handler": {
+      "()": "omni_logger.handlers.alert_handler.AlertHandler",
+      "formatter": "json"
+    }
+  },
+  "loggers": {
+    "root": {
+      "level": "DEBUG",
+      "handlers": [
+        "queue_handler"
+      ]
+    }
+  }
+}

@@ -1,0 +1,98 @@
+[production.logger_config]
+
+# Name of the logger
+# default_logger_name = "OmniLogger"
+
+# The logger's configuration file (JSON format)
+# logger_config_file = "logger_config.json"
+
+# Base directory where log files will be stored
+# logs_directory = "/var/tmp/omni_logger/"
+
+# Enable or disable automatic refresh of the logger's configuration
+# When set to true, the logger will periodically check for configuration updates
+# refresh_enabled = false
+
+# Interval (in seconds) for refreshing the logger's configuration
+# Specifies how frequently (in seconds) the logger should refresh its configuration if refresh is enabled
+# refresh_interval = 600
+
+# Extra attributes to exclude from logs
+# log_record_extra_unneeded_attrs = ["mod", "function_name","config"]
+
+# Logger Filters Section
+[production.logger_config.filters]
+
+# Censorship filter (filters specific words from logs)
+[production.logger_config.filters.censorship]
+# enabled = false
+# words_to_censor = [] # List of words to censor
+
+# Throttling filter (limits log frequency with identical content)
+[production.logger_config.filters.throttling]
+# enabled = false
+# throttle_interval = 1 # Interval to throttle logs (in seconds)
+
+# Exclude specific modules from logging
+[production.logger_config.filters.exclude_module]
+# enabled = false
+# excluded_modules = [] # List of modules to exclude from logging
+
+# Allow only specific modules to log
+[production.logger_config.filters.allowed_module]
+# enabled = false
+# allowed_modules = [] # List of modules allowed to log
+
+# Configuration for setting specific log levels per module
+[production.logger_config.filters.level_module]
+
+# Enable or disable module-level log filtering
+# enabled = false
+
+# Define log level settings for each module
+[production.logger_config.filters.level_module.module_name_level]
+# Specify each `module_name = "log_level"` pair to control logging at different levels per module.
+# Log levels can be: "critical", "fatal", "error", "warning", "warn", "info", "debug", "notset"
+# Example:
+# main = "info"  # Logs at "info" level or higher for the "main" module
+# test = "warning"  # Logs at "warning" level or higher for the "test" module
+
+# Logger Formatter Section
+[production.logger_config.formatter]
+
+# Colored formatter for logs
+[production.logger_config.formatter.ColoredFormatter]
+
+# Colors for log levels
+[production.logger_config.formatter.ColoredFormatter.colors]
+# Use one of the following colors
+# BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
+# LIGHTBLACK_EX, LIGHTRED_EX, LIGHTGREEN_EX, LIGHTYELLOW_EX,
+# LIGHTBLUE_EX, LIGHTMAGENTA_EX ,LIGHTCYAN_EX, LIGHTWHITE_EX
+# debug = "LIGHTGREEN_EX" # Color for debug logs
+# info = "WHITE"   # Color for info logs
+# warning = "RED"         # Color for warnings logs
+# error = "BLACK"           # Color for errors logs
+# critical = "WHITE"      # Color for critical logs
+
+# Background colors for log levels
+[production.logger_config.formatter.ColoredFormatter.back_color]
+# Use one of the following colors
+# BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE,
+# LIGHTBLACK_EX, LIGHTRED_EX, LIGHTGREEN_EX, LIGHTYELLOW_EX,
+# LIGHTBLUE_EX, LIGHTMAGENTA_EX ,LIGHTCYAN_EX, LIGHTWHITE_EX
+# debug = "BLACK"            # Background color for debug logs
+# info = "LIGHTBLACK_EX"     # Background color for info logs
+# warning = "LIGHTYELLOW_EX" # Background color for warning logs
+# error = "LIGHTRED_EX"      # Background color for error logs
+# critical = "RED"           # Background color for critical logs
+
+
+# Logger Handlers Section
+[production.logger_config.handlers]
+
+# Alert handler for custom alerts (disabled by default)
+[production.logger_config.handlers.AlertHandler]
+# enabled = false
+# chrono_courier_host = ""
+# chrono_courier_api_key = ""

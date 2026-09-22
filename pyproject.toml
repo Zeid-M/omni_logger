@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools", "toml"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omni_logger"
+description = ""
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "LicenseRef-Proprietary" }
+version = "v1.3.0"
+dependencies = [
+    "colorama",
+    "requests",
+    "dynaconf>=3.2.4",
+    "pathlib",
+    "datetime",
+    "toml",
+    "platformdirs",
+]
+[tool.setuptools.package-data]
+
+"omni_logger.config.config_templates" = ["*", ".*"]
+"omni_logger.config.config_files" = ["default_logger_settings.toml"]
+
+[project.scripts]
+omni_logger_install_custom_configuration = "omni_logger.helper_scripts.config_installer:main"
